@@ -2,6 +2,12 @@ import gsap from 'gsap'
 import * as THREE from 'three'
 
 function world() {
+  // function githubToJsDelivr(permalink) {
+  //   return permalink
+  //     .replace('github.com', 'cdn.jsdelivr.net/gh')
+  //     .replace('/blob/', '@')
+  // }
+
   const canvas = document.getElementById('carbon-canva')
   // Scene
   const scene = new THREE.Scene()
