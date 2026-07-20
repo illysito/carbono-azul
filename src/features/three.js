@@ -1,6 +1,21 @@
 import gsap from 'gsap'
 import * as THREE from 'three'
 
+// function isMobile() {
+//   return window.matchMedia('(max-width: 667px)').matches
+// }
+
+// // Shaders
+// import frag from './shaders/gradient_fragShader'
+// // import vert from './shaders/gradient_vertexShader'
+// import vert_2 from './shaders/gradient_vertexShader_2'
+
+// const UNIFORMS = {
+//   u_cycleSpeed: { value: 0.4 },
+//   u_cycleTime: { value: 0.8 },
+//   u_powerFactor: { value: 4.0 },
+//   u_blueFactor: { value: 0.4235 },
+// }
 function world() {
   // function githubToJsDelivr(permalink) {
   //   return permalink
@@ -30,6 +45,70 @@ function world() {
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setClearColor(0x000000, 0)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8))
+
+  //#region BACKGROUND PLANE
+
+  // -------------------------------------------------------------- Background Plane --------------------------------------------------------------
+
+  // const segments = isMobile() ? 60 : 140
+
+  // const verticalSegments = segments
+  // let horizontalSegments = 0
+
+  // if (isMobile()) {
+  //   horizontalSegments = Math.round(
+  //     (verticalSegments * window.innerWidth) / window.innerHeight
+  //   )
+  // } else {
+  //   horizontalSegments = 140
+  // }
+
+  // console.log('v ', verticalSegments)
+  // console.log('h ', horizontalSegments)
+
+  // const res = window.innerWidth / window.innerHeight
+
+  // const planeGeometry = new THREE.PlaneGeometry(
+  //   20,
+  //   20 / res,
+  //   horizontalSegments,
+  //   verticalSegments
+  // )
+  // const seed = Math.random() * 20
+  // // console.log('Seed: ', seed)
+  // const planeMaterial = new THREE.ShaderMaterial({
+  //   fragmentShader: frag,
+  //   vertexShader: vert_2,
+  //   uniforms: {
+  //     u_time: { value: 0 },
+  //     u_seed: { value: seed },
+  //     u_cycleTime: { value: UNIFORMS.u_cycleTime.value },
+  //     u_cycleSpeed: { value: UNIFORMS.u_cycleSpeed.value },
+  //     u_powerFactor: { value: UNIFORMS.u_powerFactor.value },
+  //     u_blueFactor: { value: UNIFORMS.u_blueFactor.value },
+  //   },
+  // })
+  // const backgroundPlane = new THREE.Mesh(planeGeometry, planeMaterial)
+  // let planeScale = 1
+  // if (isMobile()) {
+  //   planeScale = 1
+  // }
+
+  // planeMaterial.premultipliedAlpha = true
+  // backgroundPlane.rotation.z = Math.PI
+  // backgroundPlane.position.z = 0
+  // backgroundPlane.scale.set(planeScale, planeScale, planeScale)
+
+  // // Avoid the plane from going OVER the SPHERE
+  // backgroundPlane.renderOrder = 0
+  // backgroundPlane.material.depthWrite = false
+  // backgroundPlane.material.depthTest = true
+  // backgroundPlane.material.blending = THREE.MultiplyBlending
+  // backgroundPlane.material.transparent = true
+
+  // scene.add(backgroundPlane)
+
+  //#endregion
 
   // Background
   const loader = new THREE.TextureLoader()
@@ -214,6 +293,7 @@ function world() {
 
   // Loop
   let counter = 0
+  // let planeCounter = 0
 
   let mouseX = 0
   let mouseY = 0
@@ -241,6 +321,18 @@ function world() {
     currentY = lerp(currentY, targetY, 0.012)
 
     counter += 0.4
+
+    // Background plane
+    // planeCounter = (planeCounter + 0.001) % 5000 // safeguard to not let counter evolve endlessly
+    // planeMaterial.uniforms.u_time.value = planeCounter
+    // planeMaterial.uniforms.u_cycleSpeed.value = UNIFORMS.u_cycleSpeed.value
+    // planeMaterial.uniforms.u_cycleTime.value = UNIFORMS.u_cycleTime.value
+    // planeMaterial.uniforms.u_powerFactor.value = UNIFORMS.u_powerFactor.value
+    // planeMaterial.uniforms.u_blueFactor.value = UNIFORMS.u_blueFactor.value
+    // if (!isMobile()) {
+    //   plane.rotation.z = Math.PI * Math.cos(0.25 * planeCounter)
+    // }
+
     group.rotation.y += 0.0001
     group.rotation.x += 0.003
     group.rotation.z += 0.032
