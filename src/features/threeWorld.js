@@ -92,13 +92,13 @@ async function worldHome() {
     horizontalSegments,
     verticalSegments
   )
-  const seed = Math.random() * 20
+  const seed = Math.random() * 2
   // console.log('Seed: ', seed)
   const planeMaterial = new THREE.ShaderMaterial({
     fragmentShader: frag,
     vertexShader: vert_2,
     uniforms: {
-      u_time: { value: 120 },
+      u_time: { value: 1 },
       u_seed: { value: seed },
       u_cycleTime: { value: UNIFORMS.u_cycleTime.value },
       u_cycleSpeed: { value: UNIFORMS.u_cycleSpeed.value },
