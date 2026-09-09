@@ -1,7 +1,9 @@
 import './styles/style.css'
 
-import world from './features/three'
+import programmeAccordion from './features/programmeAccordion'
+import worldHome from './features/threeWorld'
 
-console.log('Teoria del Kaos `26')
+console.log('Workshops Carbon `26')
 
-world()
+worldHome()
+programmeAccordion()

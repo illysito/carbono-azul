@@ -199,7 +199,7 @@ function world() {
 
   // Molecule
   const sphereGeo = new THREE.TorusGeometry(0.6, 0.052, 24, 48, Math.PI * 1.96)
-  // const cylinderGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.3, 16)
+  // const sphereGeo = new THREE.BoxGeometry(0.8, 0.8, 0.8, 16)
   const material = new THREE.MeshPhysicalMaterial({
     color: 0xffffff,
     // emissie: new Color(0x00ff00),
@@ -249,7 +249,7 @@ function world() {
   // const c4 = new THREE.Mesh(cylinderGeo, material)
 
   addWobbleToMaterial(material, {
-    amplitude: 0.08,
+    amplitude: 0.0,
     frequency: 10.0,
     speed: 0.01,
   })
@@ -332,10 +332,10 @@ function world() {
     // if (!isMobile()) {
     //   plane.rotation.z = Math.PI * Math.cos(0.25 * planeCounter)
     // }
-
-    group.rotation.y += 0.0001
-    group.rotation.x += 0.003
-    group.rotation.z += 0.032
+    let percent = 1
+    group.rotation.y += 0.0001 * percent
+    group.rotation.x += 0.003 * percent
+    group.rotation.z += 0.032 * percent
     group.position.x = 0.32 * Math.sin(counter * 0.01) + currentX
     group.position.y = 0.28 * Math.cos(counter * 0.012) - currentY
     renderer.render(scene, camera)

@@ -128,7 +128,7 @@ void main()
   float greenMixer = smoothstep(0.48, 0.5, uv.x * uv.y) - smoothstep(0.5, 0.52, uv.x * uv.y);
   vec4 color = mix(white, blue, horizontalMixer) + 1. * mix(black, green, greenMixer);
 
-  // color *= 1.0 + 0.6 * random;
+  color *= 1.0 + 0.6 * random;
 
   // GREEN
 
