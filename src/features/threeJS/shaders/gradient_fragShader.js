@@ -4,11 +4,9 @@ precision highp float;
 #endif
 
 uniform float u_time;
-uniform float u_seed;
-uniform float u_cycleTime;
-uniform float u_cycleSpeed;
-uniform float u_powerFactor;
-uniform float u_blueFactor; 
+uniform float u_noiseFactor;
+uniform sampler2D u_image_1;
+uniform sampler2D u_image_2;
 uniform vec2 u_resolution;
 
 varying vec2 v_texcoord;
@@ -115,64 +113,23 @@ void main()
 {
   vec2 uv = v_texcoord;
 
-  float random = hash12(0.5 * gl_FragCoord.xy);
+  float random = hash12(0.5 * gl_FragCoord.xy * u_time);
+  float noise = snoise(vec3(4.0 * uv, 2.0 * u_time));
 
-  float u_zoom = 2. - 0.05 * u_seed;
+  // Distortion
+  vec2 distortedUV = vec2(
+    uv.x + u_noiseFactor * (noise + 0.1 * sin(u_time)),
+    uv.y + u_noiseFactor * (noise + 0.1 * sin(u_time))
+    );
 
-  vec4 white = vec4(0.98, 0.98, 0.98, 1.0);
-  vec4 black = vec4(0.02, 0.02, 0.02, 1.0);
-  vec4 blue = vec4(0.98, 0.98, 0.98, 1.0);
-  vec4 green = vec4(0.85, 0.85, 0.15, 1.0);
-  vec4 red = vec4(0.7 + 0.16 * sin(2. * u_time), 0.15, 0.15, 1.0);
-  float horizontalMixer = smoothstep(0.1, 0.4, u_zoom * uv.x * uv.y) - smoothstep(0.55, 0.95, uv.x);
-  float greenMixer = smoothstep(0.48, 0.5, uv.x * uv.y) - smoothstep(0.5, 0.52, uv.x * uv.y);
-  vec4 color = mix(white, blue, horizontalMixer) + 1. * mix(black, green, greenMixer);
+  vec4 img = texture2D(u_image_1, distortedUV);
+  img += 0.32 * random;
 
-  color *= 1.0 + 0.6 * random;
+  img.r *= 0.95;
+  img.g *= 0.92;
+  img.b *= 0.88;
 
-  // GREEN
-
-  // color
-
-  vec2 noiseCoords = uv * vec2(4. * uv.x, 4. * uv.y);
-
-  float noiseAmp = 4.0;
-  vec2 noiseFreq = 4.2 * vec2(1.8, 2.6);
-
-  // vec3 green = vec3(0.0, 0.8588, 0.2902);
-  // vec3 blue = vec3(0.1451, 0.1490, 0.4235 + 0.06 * sin(2. * u_time));
-  // vec3 black = vec3(0.02, 0.02, 0.02);
-
-  float n = 0.;
-  float initialCenter = 0.4; // (from 1 to 0.72)
-  float offsetAmplitude = 0.8; // (from 0.1 to 0.24)
-  float center = initialCenter + offsetAmplitude * sin(2. * u_time);
-  float thickness = 0.4 + 0.2 * sin(u_time);
-
-  vec4 greenLayer = vec4(0.0, 0.0, 0.0, 1.0);
-
-  for(int i = 0; i < 1; i++){
-    n += snoise(vec3(0.4 * noiseFreq * vec2(0.2 * noiseCoords.x + 0.82 * u_time + u_seed, 0.2 * noiseCoords.y - 0.12 * u_time), u_time));
-    float lines =
-    smoothstep(center - thickness, center, n) -
-    smoothstep(center, center + thickness, n);
-
-    // vec3 gradient = mix(black, blue, lines * greenMixer);
-    greenLayer = mix(black, green, lines);
-
-  }
-
-  float cycle = fract(u_cycleSpeed * u_time / (u_cycleTime + 0.4 * abs(sin(0.5 * u_time))));
-  float phase = 0.3 * sin(cycle * PI);
-
-  float pulse = pow(
-    abs(sin(26. * phase * uv.x * uv.y)), 
-    24. * u_powerFactor
-  );
-
-  gl_FragColor = (color - pulse * greenLayer);
-  // gl_FragColor = color + 1. * pulse * greenLayer;
-  // gl_FragColor = color + 1. * clamp(pow(sin(2. * u_time), 12.), 0.0, 1.0) * greenLayer;
+  gl_FragColor = img;
 
 }
 `

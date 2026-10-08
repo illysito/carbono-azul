@@ -1,9 +1,11 @@
 import './styles/style.css'
 
-import programmeAccordion from './features/programmeAccordion'
-import worldHome from './features/threeWorld'
+// import worldHome from './features/threeWorld'
+import entryIndex from './features/pages/index/entryIndex'
+import indexWorld from './features/threeJS/indexWorld'
 
 console.log('Workshops Carbon `26')
 
-worldHome()
-programmeAccordion()
+// worldHome()
+entryIndex()
+indexWorld()

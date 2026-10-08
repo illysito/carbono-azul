@@ -1,6 +1,11 @@
-.three-canvas {
-  width: 100%;
-  height: 100svh;
+.index-canva {
+  width: 105%;
+  height: 105%;
+}
+
+#index-canvas {
+  width: 105%;
+  height: 105%;
 }
 
 .cabron-canva {
