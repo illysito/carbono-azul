@@ -1,8 +1,8 @@
 import gsap from 'gsap'
 import * as THREE from 'three'
 
-import frag from './shaders/gradient_fragShader'
-import vert from './shaders/gradient_vertexShader_2'
+import frag from './shaders/frag_Index'
+import vert from './shaders/vertex'
 
 async function indexWorld() {
   function githubToJsDelivr(permalink) {
@@ -36,7 +36,47 @@ async function indexWorld() {
   const textures = await Promise.all([
     loader.loadAsync(
       githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Heraclito%20-%20BLACK.jpg'
+        'https://github.com/illysito/carbono-azul/blob/e6eb83d70319d4acade595b42259e4250da883b9/imgs/Heraclito%20-%20BLACK%20-%20drawing.jpg'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/5cb8901193d1a421b5e85aae4ca6b209d6bf1c02/imgs/Socrates%20-%20BLACK%20-%20drawing.webp'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/cfc63737d76b75936ca21759e213b59e4c8103ba/imgs/Plato%20-%20BLACK%20-%20drawing.webp'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/cfc63737d76b75936ca21759e213b59e4c8103ba/imgs/Aristoteles%20-%20BLACK%20-%20drawing.webp'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/e6eb83d70319d4acade595b42259e4250da883b9/imgs/Heraclito%20-%20BLACK%20-%20drawing.jpg'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Plato%20-%20BLACK.jpg'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
+      )
+    ),
+    loader.loadAsync(
+      githubToJsDelivr(
+        'https://github.com/illysito/carbono-azul/blob/e6eb83d70319d4acade595b42259e4250da883b9/imgs/Heraclito%20-%20BLACK%20-%20drawing.jpg'
       )
     ),
     loader.loadAsync(
@@ -62,51 +102,6 @@ async function indexWorld() {
     loader.loadAsync(
       githubToJsDelivr(
         'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Plato%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Heraclito%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Plato%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Heraclito%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/a7b6e031a25e331694c5c2661b8363de8ffdd726/imgs/Aristoteles%20-%20BLACK.jpg'
-      )
-    ),
-    loader.loadAsync(
-      githubToJsDelivr(
-        'https://github.com/illysito/carbono-azul/blob/329eefd9e96007df1f05a2730de1fdcb2adf9a1b/imgs/Plato%20-%20BLACK.jpg'
       )
     ),
   ])

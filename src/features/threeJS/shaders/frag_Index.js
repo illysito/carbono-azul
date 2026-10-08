@@ -114,16 +114,16 @@ void main()
   vec2 uv = v_texcoord;
 
   float random = hash12(0.5 * gl_FragCoord.xy * u_time);
-  float noise = snoise(vec3(4.0 * uv, 2.0 * u_time));
+  float noise = snoise(vec3(6.0 * uv, 2.0 * u_time));
 
   // Distortion
   vec2 distortedUV = vec2(
     uv.x + u_noiseFactor * (noise + 0.1 * sin(u_time)),
-    uv.y + u_noiseFactor * (noise + 0.1 * sin(u_time))
+    uv.y + u_noiseFactor * (noise + 0.2 * cos(u_time))
     );
 
   vec4 img = texture2D(u_image_1, distortedUV);
-  img += 0.32 * random;
+  img += 0.18 * random;
 
   img.r *= 0.95;
   img.g *= 0.92;

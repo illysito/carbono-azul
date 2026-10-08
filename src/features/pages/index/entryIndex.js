@@ -107,8 +107,8 @@ function entryIndex() {
     })
 
     gsap.to(actualImg, {
-      x: 60 * (currentMouseX / window.innerWidth - 0.5),
-      y: 60 * (currentMouseY / window.innerHeight - 0.5),
+      x: 60 * (currentMouseX / window.innerWidth - 0.6),
+      y: 60 * (currentMouseY / window.innerHeight - 0.6),
     })
 
     requestAnimationFrame(loop)
