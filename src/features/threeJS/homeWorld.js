@@ -260,7 +260,7 @@ export default class WorldHome {
     // time for main canvas
     if (this.imageStore) {
       this.imageStore.forEach((img) => {
-        img.mesh.position.x = img.baseX + (this.mouseX - 0.5) * 20
+        img.mesh.position.x = img.baseX - (this.mouseX - 0.5) * 20
         // img.mesh.position.y = img.baseY + (this.mouseY - 0.5) * 20
 
         // img.mesh.material.uniforms.u_time.value = 0.002 * this.time
