@@ -1,33 +1,56 @@
 import gsap from 'gsap'
 
 function nav() {
-  const images = [...document.querySelectorAll('.content-img-wrapper')]
-  const authorName = document.querySelector('.author-hero')
-  const names = [
-    '_presocráticos',
-    '_sócrates & sofistas',
-    '_platón',
-    '_aristóteles',
-    '_escuelas helenísticas',
-    '_neoplatonismo',
-    '_filosofía medieval',
-    '_renacimiento & humanismo',
-    '_racionalismo',
-    '_empirismo',
-    '_ilustración',
-    '_kant',
-    '_hegel',
-  ]
+  const navItems = [...document.querySelectorAll('.nav-link')]
 
-  let currentName = ''
-  authorName.textContent = currentName
+  if (navItems.length > 0) {
+    navItems.forEach((item) => {
+      const txt = item.firstElementChild
+      const line = item.lastElementChild
 
-  images.forEach((i, index) => {
-    i.addEventListener('mouseenter', () => {
-      currentName = names[index]
-      authorName.textContent = currentName
+      gsap.set(line, {
+        scaleX: 0,
+        transformOrigin: 'left center',
+      })
+
+      item.addEventListener('mouseenter', () => {
+        gsap.killTweensOf(line)
+
+        gsap.set(line, {
+          transformOrigin: 'left center',
+        })
+        gsap.to(line, {
+          scaleX: 1,
+          duration: 0.4,
+          ease: 'expo.inOut',
+          overwrite: 'auto',
+        })
+        gsap.to(txt, {
+          fontVariationSettings: '"wght" 450',
+          duration: 0.2,
+          ease: 'none',
+        })
+      })
+
+      item.addEventListener('mouseleave', () => {
+        gsap.killTweensOf(line)
+
+        gsap.set(line, {
+          transformOrigin: 'right center',
+        })
+        gsap.to(line, {
+          scaleX: 0,
+          duration: 0.4,
+          ease: 'expo.inOut',
+        })
+        gsap.to(txt, {
+          fontVariationSettings: '"wght" 350',
+          duration: 0.2,
+          ease: 'none',
+        })
+      })
     })
-  })
+  }
 }
 
 export default nav
